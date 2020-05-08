@@ -1,9 +1,22 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{3}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Biere(2003)]{BIDef}
+Biere, M.
+\newblock \emph{Business Intelligence for the Enterprise}.
+\newblock Pearson Education, 2003.
+\newblock ISBN 0131413031.
+
+\bibitem[Grandinetti(2013)]{infraPriceDrop}
+Grandinetti, L.
+\newblock \emph{Pervasive Cloud Computing Technologies: Future Outlooks and
+  Interdisciplinary Perspective}.
+\newblock IGI Global, 2013.
+\newblock ISBN 9781466646841.
 
 \bibitem[Metabase()]{metabaseeevguide}
 Metabase.

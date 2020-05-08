@@ -8,19 +8,27 @@ De posse dos dados já tratados e persistidos em um \textit{Data Warehouse}, ini
 %Breve descrição do modelo de referência
 As atividades descritas acima, são executadas no modelo de referência pelos seguintes componentes de \textit{software}: \textit{Pentaho Data Integration}, realizando as atividades de ETL, PostgreSQL, atuando como um DW, e o \textit{Metabase} sendo o componente onde são desenvolvidos e apresentados os painéis gráficos. O modelo de referência é ilustrado na Figura \ref{fig:modelo_referencia}
 
-% Imagem da arquitetura
+% Imagem da arquitetura do modelo de referência
 \begin{figure}[htp]
-    \centering
+   \centering
     \includegraphics[width=8cm]{Imagens/Arq_TRE}
     \caption{Arquitetura de BI no TRE-RN.}
     \label{fig:modelo_referencia}
-\end{figure}
+\end{figure} 
 
-Conforme indicado anteriormente, este trabalho demonstra a implantação de um processo de orquestação de multiplas instâncias para garantir a escalabilidade sob demanda, inicialmente, aplicado na camada de visualização, ou seja, do \textit{Metabase}. Para que possamos realizar o objetivo exposto, precisamos descrever melhor a arquitetura do componente em questão. 
+Conforme indicado anteriormente, este trabalho demonstra a implantação de um processo de orquestação de multiplas instâncias para garantir a escalabilidade sob demanda, inicialmente, aplicado na camada de visualização, ou seja, do \textit{Metabase}. Para que possamos realizar o objetivo exposto, precisamos descrever melhor a arquitetura do componente em questão, bem como, as demais ferramentas que serão utilizadas. 
 
 \subsection{Metabase}
 
 O \textit{Metabase} é uma aplicação \textit{web}, desenvolvida e mantida por uma comunidade aberta, que consiste em uma aplicação \textit{backend} que contém uma API REST, bem como os códigos para comunicação com os bancos de dados e realizar o processamento dos resultados das consultas, e uma aplicação \textit{frontend} de página única (\textit{Single Page Application}) responsável pelas interfaces de usuário do sistema, conforme descreve o "guia de desenvolvedor" \cite{metabaseeevguide}. Vale ressaltar que ambos o \textit{backend} quanto o \textit{frontend} da aplicação são encapsudos em um único pacote de \textit{software}, que na realidade do TRE é hospedado por um container Docker.
-Além dos sub componentes já explicitados, o \textit{Metabase} depende um sistema de gerenciamento de banco de dados (SGBD) que irá armazenar e servir os metadados da própria aplicação. A configuração definida pelo corpo técnico do Tribunal foi a utilização do PostgreSQL para servir este propósito, em função da existência prévia deste SGBD na instituição e a disponibilidade de colaboradores com \textit{expertise} na ferramenta.
+Além dos sub componentes já explicitados, o \textit{Metabase} depende um sistema de gerenciamento de banco de dados (SGBD) que irá armazenar e servir os metadados da própria aplicação. A configuração definida pelo corpo técnico do Tribunal foi a utilização do PostgreSQL para servir este propósito, em função da existência prévia deste SGBD na instituição e a disponibilidade de colaboradores com \textit{expertise} na ferramenta. A Figura \ref{fig:arq_metabase} ilustra a configuração descrita acima. 
 
-%TODO: incluir Figura ilustrando o esquema do metabase...
+% Imagem da arquitetura do metabase
+\begin{figure}[htp]
+   \centering
+    \includegraphics[width=8cm]{Imagens/Arq_Metabase}
+    \caption{Arquitetura do \textit{Metabase}.}
+    \label{fig:arq_metabase}
+\end{figure} 
+
+
