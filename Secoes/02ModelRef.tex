@@ -1,6 +1,26 @@
-% !TEX root = ../example_paper.tex
-
 \section{Modelo de Referência}
 %Apresentação dos conceitos de BI
+O modelo de referência idealizado e implementado no TRE-RN é composto por componentes de \textit{software} capazes de realizar as atividades referentes ao processo de desenvolvimento de aplicações de \textit{business intelligence}, sendo elas: ETL, DW e visualização.
+A etapa de ETL (\textit{Extract, Transform and Load}), corresponde ao processo de extração, transformação e carga dos dados oriundos das diversas fontes de negócio em um repositório de dados dedicado ao processo de análise. Os dados resultantes da atividade de ETL devem encontrar-se integrados e modelados em um formato mais adequado a carga imposta pelo processo analítico. 
+Esse repositório mencionado é exatamente a segunda etapa de um processo BI, denominado \textit{Data Warehouse}, que em traducão literal significa armazém de dados, e consiste no armazenamento dos dados produzidos pelo processo anterior.
+De posse dos dados já tratados e persistidos em um \textit{Data Warehouse}, inicia-se a etapa de visualização dos dados, que consiste no desenvolvimento de painéis visuais responsáveis por apresentar as informações necessárias para a tomada de decisão de negócio.
 
 %Breve descrição do modelo de referência
+As atividades descritas acima, são executadas no modelo de referência pelos seguintes componentes de \textit{software}: \textit{Pentaho Data Integration}, realizando as atividades de ETL, PostgreSQL, atuando como um DW, e o \textit{Metabase} sendo o componente onde são desenvolvidos e apresentados os painéis gráficos. O modelo de referência é ilustrado na Figura \ref{fig:modelo_referencia}
+
+% Imagem da arquitetura
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{Imagens/Arq_TRE}
+    \caption{Arquitetura de BI no TRE-RN.}
+    \label{fig:modelo_referencia}
+\end{figure}
+
+Conforme indicado anteriormente, este trabalho demonstra a implantação de um processo de orquestação de multiplas instâncias para garantir a escalabilidade sob demanda, inicialmente, aplicado na camada de visualização, ou seja, do \textit{Metabase}. Para que possamos realizar o objetivo exposto, precisamos descrever melhor a arquitetura do componente em questão. 
+
+\subsection{Metabase}
+
+O \textit{Metabase} é uma aplicação \textit{web}, desenvolvida e mantida por uma comunidade aberta, que consiste em uma aplicação \textit{backend} que contém uma API REST, bem como os códigos para comunicação com os bancos de dados e realizar o processamento dos resultados das consultas, e uma aplicação \textit{frontend} de página única (\textit{Single Page Application}) responsável pelas interfaces de usuário do sistema, conforme descreve o "guia de desenvolvedor" \cite{metabaseeevguide}. Vale ressaltar que ambos o \textit{backend} quanto o \textit{frontend} da aplicação são encapsudos em um único pacote de \textit{software}, que na realidade do TRE é hospedado por um container Docker.
+Além dos sub componentes já explicitados, o \textit{Metabase} depende um sistema de gerenciamento de banco de dados (SGBD) que irá armazenar e servir os metadados da própria aplicação. A configuração definida pelo corpo técnico do Tribunal foi a utilização do PostgreSQL para servir este propósito, em função da existência prévia deste SGBD na instituição e a disponibilidade de colaboradores com \textit{expertise} na ferramenta.
+
+%TODO: incluir Figura ilustrando o esquema do metabase...

@@ -5,10 +5,9 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[metabase()]{metabase}
-metabase.
-\newblock 01 what is metabase.
-\newblock URL
-  \url{https://www.metabase.com/docs/latest/users-guide/01-what-is-metabase.html}.
+\bibitem[Metabase()]{metabaseeevguide}
+Metabase.
+\newblock Guia do desenvolvedor.
+\newblock URL \url{https://www.metabase.com/docs/latest/developers-guide.html}.
 
 \end{thebibliography}
