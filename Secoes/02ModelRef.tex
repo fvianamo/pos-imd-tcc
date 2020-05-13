@@ -18,10 +18,26 @@ As atividades descritas acima, são executadas no modelo de referência pelos se
 
 Conforme indicado anteriormente, este trabalho demonstra a implantação de um processo de orquestação de multiplas instâncias para garantir a escalabilidade sob demanda, inicialmente, aplicado na camada de visualização, ou seja, do \textit{Metabase}. Para que possamos realizar o objetivo exposto, precisamos descrever melhor a arquitetura do componente em questão, bem como, as demais ferramentas que serão utilizadas. 
 
-\subsection{Metabase}
+\subsection{Ferramentas}
 
-O \textit{Metabase} é uma aplicação \textit{web}, desenvolvida e mantida por uma comunidade aberta, que consiste em uma aplicação \textit{backend} que contém uma API REST, bem como os códigos para comunicação com os bancos de dados e realizar o processamento dos resultados das consultas, e uma aplicação \textit{frontend} de página única (\textit{Single Page Application}) responsável pelas interfaces de usuário do sistema, conforme descreve o "guia de desenvolvedor" \cite{metabaseeevguide}. Vale ressaltar que ambos o \textit{backend} quanto o \textit{frontend} da aplicação são encapsudos em um único pacote de \textit{software}, que na realidade do TRE é hospedado por um container Docker.
-Além dos sub componentes já explicitados, o \textit{Metabase} depende um sistema de gerenciamento de banco de dados (SGBD) que irá armazenar e servir os metadados da própria aplicação. A configuração definida pelo corpo técnico do Tribunal foi a utilização do PostgreSQL para servir este propósito, em função da existência prévia deste SGBD na instituição e a disponibilidade de colaboradores com \textit{expertise} na ferramenta. A Figura \ref{fig:arq_metabase} ilustra a configuração descrita acima. 
+\subsubsection{\textit{Docker}}
+
+Conforme descrito em sua documentação oficial \cite{dockerDoc}, o \textit{Docker} é uma plataforma de \textit{software} aberto voltada para o desenvolvimento, entrega e execução de aplicações isoladamente. Esta unidade isolada, resultante do uso do \textit{Docker}, é denominada como container. Os containeres atendem basicamente os mesmos propósito das máquinas virtuais (VMs) e são executados sobre uma máquina física ou até mesmo virtual. No entento, diferente das VMs, os containeres não são executados sobre um virtualizador, mas diretamente no \textit{kernel} da máquina hospedeira, o que lhes garante uma estrutura mais enxuta.
+
+Essa tecnologia já é utilizada em aplicações que suportam a atividade do TRE-RN, sejam elas desenvolvidas pelo próprio Tribunal ou adquirida de terceiros. Logo, por ter o corpo técnico de servidores fortemente capacitados na manutenção e utilização de \textit{Docker}, a utilização desta ferramenta foi sugerida como base para o modelo de referência desde o início das atividades.
+
+\subsubsection{PostgreSQL}
+
+Outra ferramenta relavante para o projeto do modelo de refência é o PostgreSQL. Utilizado como DW e como repositório dos metadados do \textit{Metabase}, o PostgreSQL é um Sistema de Gerencimento de Banco de Dados (SGBD) de código aberto desenvolvimento, inicialmente, pela Universidade da Califórnia, conforme apresentado pela documentação oficial da ferramenta \cite{postgresDoc}.
+
+A escolha do PostgreSQl foi uma sugestão do TRE-RN visto o longo histórico de utilização da ferramenta pelo Tribunal em projetos extremamente relevantes. Por exemplo, este SGBD é responsável pela gestão dos dados oriundos do sistema de Processo Judicial Eletrônico (PJe), onde tramitam, atualmente, todos os processos de segundo grau da justiça eleitoral do Rio Grande do Norta.
+
+Assim como com o \textit{Docker}, o corpo técnico do Tribunal possui a capacitação mais do que necessária para implantação de manutenção de instância de PostgreSQL. 
+
+\subsubsection{Metabase}
+
+O \textit{Metabase} é uma aplicação \textit{web}, desenvolvida e mantida por uma comunidade aberta, que consiste em uma aplicação \textit{backend} que contém uma API REST, bem como os códigos para comunicação com os bancos de dados e realizar o processamento dos resultados das consultas, e uma aplicação \textit{frontend} de página única (\textit{Single Page Application}) responsável pelas interfaces de usuário do sistema, conforme descreve o guia do desenvolvedor \cite{metabaseeevguide}. Vale ressaltar que ambos o \textit{backend} quanto o \textit{frontend} da aplicação são encapsudos em um único pacote de \textit{software}, que na realidade do TRE é hospedado por um container Docker.
+Além dos sub componentes já explicitados, o \textit{Metabase} depende um sistema de gerenciamento de banco de dados (SGBD) que irá armazenar e servir os metadados da própria aplicação. A configuração definida pelo corpo técnico do Tribunal foi a utilização do PostgreSQL para servir a este propósito, dado \textit{expertise} previamente adquirida na implantação e manuteção deste SGBD. A Figura \ref{fig:arq_metabase} ilustra a configuração descrita acima. 
 
 % Imagem da arquitetura do metabase
 \begin{figure}[htp]
