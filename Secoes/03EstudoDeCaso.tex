@@ -10,3 +10,17 @@ Um destes momentos foi um treinamento de cerca de 60 servidores de diversos Trib
 Infelizmente, as estatíscas de consumo da instância do Metabase que foi utilizada para este treinamento não foram salvas, por se tratar de uma instância criada com o único objetivo de realização do evento. Para que possamos quantificar o impacto do cenário descrito, tentou-se simular a carga a qual o Metabase foi exposto.
 
 A ferramenta utilizada para a simulação foi o \textit{Apache HTTP server benchmarking}, utilizando um \textit{MacBook Pro Mid 2014} equipado com processador Intel Core i5-4278U, 8GB de RAM DDR3 e rodando o sistema macOS Mojave versão 10.14.6. O serviço do Metabase foi hospedado no mesmo modelo descrito na Figura \ref{fig:arq_metabase}, utilizando containeres \textit{Docker}. 
+
+O cenário de teste consiste em multiplos usuários realizando autenticação no serviço, com a quantidade usuários simultâneos variando de 1 a 60, em passos de 10 usuários. São realizados um total de 200 requisições para cada quantidade de usuário simultâneos. 
+
+A Figura \ref{fig.avg-resp-time} apresenta o tempo médio de resposta do Metabase para cada cenário testado. Nos resultados apresentados podemos observar que o tempo médio de resposta cresce a uma taxa quase linear a quantidade de usuários simultâneos. Este aumento será percebido pelos usuários na demora do sistema ao carregar as telas, gerando um experiência de uso não satisfatória. 
+
+\begin{figure}[htp]
+   \centering
+    \includegraphics[width=8cm]{Imagens/avg-response-time}
+    \caption{Tempo Médio de Resposta de Autenticação para Instância Única.}
+    \label{fig.avg-resp-time}
+\end{figure} 
+
+A próxima seção deste trabalho irá descrever o procedimento do hospedagem do Metabase em um modelo de multiplas instâncias com escalabilidade automática, utilizando o \textit{Kubernetes} como osquestrador dos containeres \textit{Docker}.
+

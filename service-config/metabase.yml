@@ -1,0 +1,41 @@
+# Service 
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        app: metabase
+    name: metabase-svc
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+      name: http
+    selector:
+        app: metabase
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metabase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deploy: metabase
+  template:
+    metadata:
+      labels:
+        deploy: metabase
+        app: metabase
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: metabase
+          imagePullPolicy: IfNotPresent
+          image: metabase/metabase:v0.35.3
+          ports:
+          - containerPort: 3000
