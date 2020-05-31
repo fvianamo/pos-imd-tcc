@@ -1,0 +1,81 @@
+# configs de banco de dados do Metabase
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metabase-config
+  labels:
+    app: metabase
+data:
+  MB_DB_TYPE: <DATABASE TYPE>
+  MB_DB_DBNAME: <DATABASE NAME>
+  MB_DB_PORT: <DATABASE PORT>
+  MB_DB_USER: <DATABASE USER>
+  MB_DB_PASS: <DATABASE PASSWORD>
+  MB_DB_HOST: <DATABASE HOST>
+
+---
+
+# definicao do service que expoe os pods
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        app: metabase
+    name: metabase-svc
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+      name: http
+    selector:
+        app: metabase
+
+---
+
+# definicao do pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metabase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deploy: metabase
+  template:
+    metadata:
+      labels:
+        deploy: metabase
+        app: metabase
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: metabase
+          imagePullPolicy: IfNotPresent
+          image: metabase/metabase:v0.35.3
+          #resources:
+          #  requests:
+          #    cpu: 500m
+          ports:
+          - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: metabase-config
+
+---
+
+# definicao do "horizontal pod autoscaler"
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: metabase-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: metabase
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
