@@ -6,11 +6,11 @@ metadata:
     app: metabase
 data:
   MB_DB_TYPE: "postgres"
-  MB_DB_DBNAME: "metabase"
+  MB_DB_DBNAME: "postgres"
   MB_DB_PORT: "31941"
   MB_DB_USER: "postgres"
   MB_DB_PASS: "postgres"
-  MB_DB_HOST: "192.168.1.7" #inser ir ipprivado da rede aqui
+  MB_DB_HOST: "192.168.1.10" #inser ir ipprivado da rede aqui
 
 ---
 
@@ -52,9 +52,9 @@ spec:
         - name: metabase
           imagePullPolicy: IfNotPresent
           image: metabase/metabase:v0.35.3
-          #resources:
-          #  requests:
-          #    cpu: 500m
+          resources:
+            requests:
+              cpu: 500m
           ports:
           - containerPort: 3000
           envFrom:
@@ -63,15 +63,18 @@ spec:
 
 ---
 
-#apiVersion: autoscaling/v1
-#kind: HorizontalPodAutoscaler
-#metadata:
-#  name: metabase-hpa
-#spec:
-#  scaleTargetRef:
-#    apiVersion: apps/v1
-#    kind: Deployment
-#    name: metabase
-#  minReplicas: 1
-#  maxReplicas: 5
-#  targetCPUUtilizationPercentage: 50
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: metabase-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: metabase
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 100
+  #behavior:
+    #scaleUp:
+      #stabilizationWindowSeconds: 300
