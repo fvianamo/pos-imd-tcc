@@ -29,6 +29,8 @@ spec:
       name: http
     selector:
         app: metabase
+    externalIPs:
+      - 52.233.184.22
 
 ---
 
