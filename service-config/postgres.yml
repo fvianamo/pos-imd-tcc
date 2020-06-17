@@ -48,5 +48,7 @@ spec:
   type: NodePort
   ports:
    - port: 5432
+     nodePort: 35432
+     name: http
   selector:
    app: postgres
