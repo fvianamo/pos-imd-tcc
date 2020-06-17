@@ -7,10 +7,10 @@ metadata:
 data:
   MB_DB_TYPE: "postgres"
   MB_DB_DBNAME: "postgres"
-  MB_DB_PORT: "32640"
+  MB_DB_PORT: "5432"
   MB_DB_USER: "postgres"
   MB_DB_PASS: "postgres"
-  MB_DB_HOST: "10.106.85.117" #inser ir ipprivado da rede aqui
+  MB_DB_HOST: "10.103.105.172" #inser ir ipprivado da rede aqui
 
 ---
 
@@ -23,7 +23,7 @@ metadata:
 spec:
     type: LoadBalancer
     ports:
-    - port: 80
+    - port: 33000
       protocol: TCP
       targetPort: 3000
       name: http
@@ -52,29 +52,29 @@ spec:
         - name: metabase
           imagePullPolicy: IfNotPresent
           image: metabase/metabase:v0.35.3
-          resources:
-            requests:
-              cpu: 500m
+#          resources:
+#            requests:
+#              cpu: 500m
           ports:
           - containerPort: 3000
           envFrom:
             - configMapRef:
                 name: metabase-config
 
----
+#---
 
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: metabase-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: metabase
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 100
+#apiVersion: autoscaling/v1
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: metabase-hpa
+#spec:
+#  scaleTargetRef:
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    name: metabase
+#  minReplicas: 1
+#  maxReplicas: 5
+#  targetCPUUtilizationPercentage: 100
   #behavior:
     #scaleUp:
       #stabilizationWindowSeconds: 300
