@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       labels:
-	deploy: postgres-db
+  deploy: postgres-db
         app: postgres-db
     spec:
       containers:
@@ -35,20 +35,3 @@ spec:
           envFrom:
             - configMapRef:
                 name: postgres-config
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  labels:
-    app: postgres
-spec:
-  type: NodePort
-  ports:
-   - port: 5432
-     nodePort: 30432
-     name: http
-  selector:
-   app: postgres
