@@ -24,14 +24,14 @@ spec:
     metadata:
       labels:
   deploy: postgres-db
-        app: postgres-db
-    spec:
-      containers:
-        - name: postgres-db
-          image: postgres:alpine
-          imagePullPolicy: "IfNotPresent"
-          ports:
-            - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: postgres-config
+    app: postgres-db
+  spec:
+    containers:
+      - name: postgres-db
+        image: postgres:alpine
+        imagePullPolicy: "IfNotPresent"
+        ports:
+          - containerPort: 5432
+        envFrom:
+          - configMapRef:
+            name: postgres-config
