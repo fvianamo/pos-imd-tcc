@@ -8,9 +8,7 @@ data:
   POSTGRES_DB: postgres
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,8 +20,8 @@ spec:
       deploy: postgres-db
   template:
     metadata:
-      labels:
-  deploy: postgres-db
+    labels:
+  #deploy: postgres-db
     app: postgres-db
   spec:
     containers:
