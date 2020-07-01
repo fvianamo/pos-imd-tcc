@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: postgres-config
   labels:
-    app: postgres
+    app: postgres-db
 data:
   POSTGRES_DB: postgres
   POSTGRES_USER: postgres
@@ -20,16 +20,16 @@ spec:
       deploy: postgres-db
   template:
     metadata:
-    labels:
-  #deploy: postgres-db
-    app: postgres-db
-  spec:
-    containers:
-      - name: postgres-db
-        image: postgres:alpine
-        imagePullPolicy: "IfNotPresent"
-        ports:
-          - containerPort: 5432
-        envFrom:
-          - configMapRef:
-            name: postgres-config
+      labels:
+        deploy: postgres-db
+        app: postgres-db
+    spec:
+      containers:
+        - name: postgres-db
+          image: postgres:alpine
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
