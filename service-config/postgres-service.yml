@@ -5,9 +5,12 @@ metadata:
   labels:
     app: postgres-svc
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 5432
+      name: postgres
+      protocol: TCP
+      targetPort: 5432
   selector:
     app: postgres-db
   
