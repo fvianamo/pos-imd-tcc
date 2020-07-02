@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: metabase
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       deploy: metabase
