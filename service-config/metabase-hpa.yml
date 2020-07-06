@@ -8,8 +8,8 @@ spec:
     kind: Deployment
     name: metabase
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 4
   targetCPUUtilizationPercentage: 100
-  behavior:
-    scaleUp:
-      stabilizationWindowSeconds: 300
+#  behavior:
+#    scaleUp:
+#      stabilizationWindowSeconds: 300

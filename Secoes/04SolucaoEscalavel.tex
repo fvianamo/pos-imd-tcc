@@ -31,9 +31,9 @@ A solução proposta por este trabalho consiste, então, na implantação do Met
     \label{fig.metabase-k8s}
 \end{figure} 
 
-O processo para implantação da solução proposta em um \textit{cluster} Kubernetes consiste, basicamente, na elaboração de um arquivo de configuração, em formato YAML, que decreve para o \textit{cluster} os componentes que devem ser instânciados. 
+O processo para implantação da solução proposta em um \textit{cluster} Kubernetes consiste, basicamente, na elaboração de um arquivo de configuração, em formato YAML, que descreve para o \textit{cluster} os componentes que devem ser instânciados. 
 
-O bloco de código a seguir define um objeto \textit{configmap} que descreve um conjunto de variávies de ambiente a serem setadas nos \textit{pods} para configuração da instância PostgreSQl que servirá de banco de dados da aplicação.
+O bloco de código a seguir define um objeto \textit{configgmap} que descreve um conjunto de variávies de ambiente a serem setadas nos \textit{pods} para configuração da instância PostgreSQl que servirá de banco de dados da aplicação.
 
 \begin{lstlisting}[language=yaml]
 apiVersion: v1
@@ -57,21 +57,23 @@ A seguir temos a definição do \textit{service} que será responsável pelo bal
 apiVersion: v1
 kind: Service
 metadata:
-    labels:
-        app: metabase
-    name: metabase-svc
+  name: metabase-svc
 spec:
-    type: LoadBalancer
-    ports:
-    - port: 80
-      protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: metabase
+  ports:
+    - port: 3000
       targetPort: 3000
+      protocol: TCP
       name: http
-    selector:
-        app: metabase
 \end{lstlisting} 
 
-O arquivo com a definição do \textit{pod} do Metabase a ser executado no \textit{cluster} pode ser visto a seguir.
+O arquivo com a definição do \textit{pod} do Metabase a ser executado no \textit{cluster} pode ser visto a seguir. O YAML em questão descreve algumas propriedades do \textit{pod}: a imagem base para execução do container, a porta onde o serviço será exposto, a referência do \textit{configMap} com as variáveis de ambiente, a quantidade de recursos mínimos para a aplicação e o caminho para verificação de disponibilidade do serviço. 
+
+Por meio do rótufo \textit{spec.template.spec.resources}, são definidos os limites mínimos de recurso disponível em um \textit{node} do \textit{cluster} para que o \textit{pod} possa ser alocado, nesse caso apenas a quantidade mínima de 1 vCPU foi especificada. 
+
+Já o rotulo \textit{spec.template.readinessProbe} defini o método pelo qual o \textit{cluster} poderá verificar a saúde da aplicação, onde nesse caso foi definido por uma requisição GET na porta 3000 no caminho '/' do container, dessa forma, o \textit{pod} só passará a receber requisições externas quando o resultado da requisição passar a ser positivo, ou seja.
 
 \begin{lstlisting}[language=yaml]
 apiVersion: apps/v1
@@ -95,13 +97,20 @@ spec:
           imagePullPolicy: IfNotPresent
           image: metabase/metabase:v0.35.3
           ports:
-          - containerPort: 3000
+            - containerPort: 3000
           envFrom:
             - configMapRef:
                 name: metabase-config
+          resources:
+            requests:
+              cpu: 1000m
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
 \end{lstlisting} 
 
-Por fim, a configuração do objeto \textit{horizontal pod autoscalers} é realizada no bloco de código a seguir, descrevendo o objeto de tal forma que sempre que a média de utilização de CPU entre os \textit{pods} da aplicação sejá superior a 50\% seja adicionado um novo \textit{pod} ao conjunto, sendo permitido um conjunto mínimo de 1 \textit{pod} e máximo de 5 \textit{pods}. 
+Por fim, a configuração do objeto \textit{horizontal pod autoscalers} é realizada no bloco de código a seguir, descrevendo o objeto de tal forma que sempre que a média de utilização de CPU entre os \textit{pods} da aplicação sejá superior a 100\% seja adicionado um novo \textit{pod} ao conjunto, sendo permitido um conjunto mínimo de 1 \textit{pod} e máximo de 4 \textit{pods}. 
 
 \begin{lstlisting}[language=yaml]
 apiVersion: autoscaling/v1
@@ -114,8 +123,8 @@ spec:
     kind: Deployment
     name: metabase
   minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 50
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 100
 \end{lstlisting} 
 
 Uma vez que todos os arquivos de configuração descritos anteriormente sejam submetidos e aceitos pelo \textit{cluster} Kubernetes, toda as operações de aumento e diminuição da quantidade de instâncias serão efetuadas automáticamente pelo \textit{control plane} do \textit{Kubernetes}.  

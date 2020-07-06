@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: metabase
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       deploy: metabase
@@ -39,3 +39,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: metabase-config
+          resources:
+            requests:
+              cpu: 1000m
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
