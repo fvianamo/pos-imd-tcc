@@ -22,7 +22,7 @@ Por fim, o \textit{horizontal pod autoscalers} é objeto responsável pela escal
 
 \subsection{Escalando o Metabase com Kubernetes}
 
-A solução proposta por este trabalho consiste, então, na implantação do Metabase em um \textit{cluster} Kubernetes, onde o container da aplicação será hospedado em um conjunto dinâmico de \textit{pods} que, por sua vez, terá a quantidade de instâncias definido por um \textit{horizontal pod autoscalers}. Por fim, utilizamos um \textit{service} para expor a aplicação e realizar o balanceamento de carga entre as instâncias em execução. A figura \ref{fig.metabase-k8s} ilustra a solução proposta.
+A solução proposta por este trabalho consiste, então, na implantação do Metabase em um \textit{cluster} Kubernetes, onde o container da aplicação será hospedado em um conjunto dinâmico de \textit{pods} que, por sua vez, terá a quantidade de instâncias definido por um \textit{horizontal pod autoscalers}. Por fim, utilizamos um \textit{service} para expor a aplicação e realizar o balanceamento de carga entre as instâncias em execução. A Figura \ref{fig.metabase-k8s} ilustra a solução proposta.
 
 \begin{figure}[htp]
    \centering
@@ -110,7 +110,7 @@ spec:
               port: 3000
 \end{lstlisting} 
 
-Por fim, a configuração do objeto \textit{horizontal pod autoscalers} é realizada no bloco de código a seguir, descrevendo o objeto de tal forma que sempre que a média de utilização de CPU entre os \textit{pods} da aplicação sejá superior a 100\% seja adicionado um novo \textit{pod} ao conjunto, sendo permitido um conjunto mínimo de 1 \textit{pod} e máximo de 4 \textit{pods}. 
+Por fim, a configuração do objeto \textit{horizontal pod autoscalers} é realizada no bloco de código a seguir, descrevendo o objeto de tal forma que sempre que a média de utilização de CPU entre os \textit{pods} da aplicação atingir níveis superiores a 100\% seja adicionado um novo \textit{pod} ao conjunto, sendo permitido um conjunto mínimo de 1 \textit{pod} e máximo de 4 \textit{pods}. 
 
 \begin{lstlisting}[language=yaml]
 apiVersion: autoscaling/v1
