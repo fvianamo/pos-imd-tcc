@@ -35,7 +35,7 @@ O processo para implantação da solução proposta em um \textit{cluster} Kuber
 
 O bloco de código a seguir define um objeto \textit{configgmap} onde são declaradas um conjunto de variávies de ambiente a serem utilizadas pelos \textit{pods} para configuração da instância PostgreSQl que servirá de banco de dados da aplicação.
 
-\begin{lstlisting}[language=yaml]
+\begin{lstlisting}[caption={YAML de configuração do \textit{Config Map}},label={lst:configmap},language=yaml]
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -53,7 +53,7 @@ data:
 
 A seguir temos a definição do \textit{service} que será responsável pelo balanceamente de carga entre as instâncias do metabase em execução no \textit{cluster}. Para a configuração de um \textit{service} é necessária a configuração de um tipo, por meio do atributo \textit{spec.type}, neste caso o tipo selecionado foi LoadBalancer para que haja o balanceamento de carga entre os \textit{pods} por trás do \textit{service}. O atributo \textit{spec.selector} é utilizado para definir o critério para alocação de \textit{pods} neste \textit{service}, neste caso corresponde a todos os \textit{pods} que tenham a \textit{tag} app setada para o valor metabase. Por fim, o atributo \textit{spec.ports} é utilizada para configuração de um lista de portas as quais o \textit{service} irá escutar, descriminando para cada entrada: o número da porta do \textit{service} (\textit{spec.ports.port}), o número da porta do \textit{pod} ao qual deve ser realizado o direcionamento (\textit{spec.ports.targetPort}), o protocolo a ser utilizado (\textit{spec.ports.protocol}) e, opcionalmente, um nome para a entraga (\textit{spec.ports.name}). 
 
-\begin{lstlisting}[language=yaml]
+\begin{lstlisting}[caption={YAML de configuração do \textit{service}},label={lst:service},language=yaml]
 apiVersion: v1
 kind: Service
 metadata:
@@ -75,7 +75,7 @@ Por meio do rótufo \textit{spec.template.spec.resources}, são definidos os lim
 
 Já o rotulo \textit{spec.template.readinessProbe} defini o método pelo qual o \textit{cluster} poderá verificar a saúde da aplicação, onde nesse caso foi definido por uma requisição GET na porta 3000 no caminho '/' do container, dessa forma, o \textit{pod} só passará a receber requisições externas quando o resultado da requisição passar a ser positivo.
 
-\begin{lstlisting}[language=yaml]
+\begin{lstlisting}[caption={YAML de configuração do \textit{deployment}},label={lst:deployment},language=yaml]
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -114,7 +114,7 @@ Por fim, a configuração do objeto \textit{horizontal pod autoscalers} (HPA) é
 
 Primeiramente, defini-se no arquivo YAML a referência ao \textit{deployment} no qual o HPA irá atuar, por meio do atributo \textit{spec.scaleTargetRef}. Em seguida são declaradas a quantidade mínima (\textit{spec.minReplicas}) e máxima (\textit{spec.maxReplicas}) de pods em execução, além do critério de escabilidade, onde neste caso utilizou-se a média do percentual de uso de CPU entre os \textit{pods}, declarado no atributo \textit{spec.targetCPUUtilizationPercentage}.  
 
-\begin{lstlisting}[language=yaml]
+\begin{lstlisting}[caption={YAML de configuração do HPA},label={lst:hpa},language=yaml]
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
