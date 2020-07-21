@@ -1,18 +1,18 @@
-\section{Modelo de Referência}
+\section{Arquitetura de BI}
 %Apresentação dos conceitos de BI
-O modelo de referência idealizado e implementado no TRE-RN é composto por componentes de \textit{software} capazes de realizar as atividades referentes ao processo de desenvolvimento de aplicações de \textit{business intelligence}, sendo elas: ETL, DW e visualização.
+A arquitetura de BI idealizada e implementada no TRE-RN é composto por componentes de \textit{software} capazes de realizar as atividades referentes ao processo de desenvolvimento de aplicações de \textit{business intelligence}, sendo elas: ETL, DW e visualização.
 A etapa de ETL (\textit{Extract, Transform and Load}), corresponde ao processo de extração, transformação e carga dos dados oriundos das diversas fontes de negócio em um repositório de dados dedicado ao processo de análise. Os dados resultantes da atividade de ETL devem encontrar-se integrados e modelados em um formato mais adequado a carga imposta pelo processo analítico. 
 Esse repositório mencionado é exatamente a segunda etapa de um processo BI, denominado \textit{Data Warehouse}, que em traducão literal significa armazém de dados, e consiste no armazenamento dos dados produzidos pelo processo anterior.
 De posse dos dados já tratados e persistidos em um \textit{Data Warehouse}, inicia-se a etapa de visualização dos dados, que consiste no desenvolvimento de painéis visuais responsáveis por apresentar as informações necessárias para a tomada de decisão de negócio \cite{BIProcess}.
 
-%Breve descrição do modelo de referência
-As atividades descritas acima, são executadas no modelo de referência pelos seguintes componentes de \textit{software}: \textit{Pentaho Data Integration}, realizando as atividades de ETL, PostgreSQL, atuando como um DW, e o \textit{Metabase} sendo o componente onde são desenvolvidos e apresentados os painéis gráficos. O modelo de referência é ilustrado na Figura \ref{fig:modelo_referencia}
+%Breve descrição da arquitetura
+As atividades descritas acima, são executadas na arquitetura pelos seguintes componentes de \textit{software}: \textit{Pentaho Data Integration}, realizando as atividades de ETL, PostgreSQL, atuando como um DW, e o \textit{Metabase} sendo o componente onde são desenvolvidos e apresentados os painéis gráficos. A arquitetura de BI é ilustrado na Figura \ref{fig:modelo_referencia}
 
-% Imagem da arquitetura do modelo de referência
+% Imagem da arquitetura do TRE
 \begin{figure}[htp]
    \centering
     \includegraphics[width=8cm]{Imagens/Arq_TRE}
-    \caption{Arquitetura de BI no TRE-RN.}
+    \caption{Arquitetura de BI do TRE-RN.}
     \label{fig:modelo_referencia}
 \end{figure} 
 
@@ -24,7 +24,7 @@ Conforme indicado anteriormente, este trabalho demonstra a implantação de um p
 
 Conforme descrito em sua documentação oficial \cite{dockerDoc}, o \textit{Docker} é uma plataforma de \textit{software} aberto voltada para o desenvolvimento, entrega e execução de aplicações isoladamente. Esta unidade isolada, resultante do uso do \textit{Docker}, é denominada como container. Os containeres atendem basicamente os mesmos propósito das máquinas virtuais (VMs) e são executados sobre uma máquina física ou até mesmo virtual. No entento, diferente das VMs, os containeres não são executados sobre um virtualizador, mas diretamente no \textit{kernel} da máquina hospedeira, o que lhes garante uma estrutura mais enxuta.
 
-Essa tecnologia já é utilizada em aplicações que suportam a atividade do TRE-RN, sejam elas desenvolvidas pelo próprio tribunal ou adquirida de terceiros. Logo, por ter o corpo técnico de servidores fortemente capacitados na manutenção e utilização de \textit{Docker}, a utilização desta ferramenta foi sugerida como base para o modelo de referência desde o início das atividades.
+Essa tecnologia já é utilizada em aplicações que suportam a atividade do TRE-RN, sejam elas desenvolvidas pelo próprio tribunal ou adquirida de terceiros. Logo, por ter o corpo técnico de servidores fortemente capacitados na manutenção e utilização de \textit{Docker}, a utilização desta ferramenta foi sugerida como base para a arquitetura de BI desde o início das atividades.
 
 \subsubsection{PostgreSQL}
 
