@@ -1,1 +1,7 @@
 \section{Conclusão}
+
+Este trabalho apresentou, brevemente, a arquitetura de BI desenvolvida pela residência de TI do Tribunal Regional Eleitoral do Rio Grande do Norte, dando maior enfâse as tecnologias envolvidas na camada de visualização de dados, onde foram apresentados o serviço \textit{Metabase}, suas dependências e a forma de hospedagem , na versão atual da solução.
+
+Visando prover uma maior robustez a camada de visualização, foi proposta uma solução de escalabilidade automática do serviço por meio do uso do \textit{Kubernetes} que apresentou resultados positivos nos cenários testados. A solução proposta prevê o uso do componente \textit{horizontal pod autoscalers} (HPA), que monitora a taxa de utilização de CPU de cada instância do serviço e realiza operações aumentando ou diminuindo a quantidade de instâncias para manter a métrica no valor desejado.
+
+Os resultados apresentados neste trabalho reforçam a ideia, já existente, de utilização do \textit{Kubernetes} como solução de orquestração de containeres para o TRE. Este novo modelo de hospedagem pode ser utilizado não apenas em outros serviços da arquitetura de BI, mas também em outros serviços de \textit{software} desenvolvidos pelo próprio tribunal ou por terceiros. 
