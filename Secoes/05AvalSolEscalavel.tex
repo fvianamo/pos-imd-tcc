@@ -23,7 +23,7 @@ Já o efeito da escalabilidade na quantidade de instâncias resultou em uma melh
 
 Uma das hipóteses que pode explicar essa não linearidade observada seria o \textit{delay} acrescentado pelo algoritmo de roteamento implementado no balanceador de carga do serviço do \textit{Kubernetes} implementado pelo \textit{Digital Ocean}. 
 
-A princípio, o algoritmo padrão utilizado é o \textit{Round Robin}, onde requisições recebidas pelo balanceador de carga são distribuido igualmente entre os nós do \textit{cluster}. No entanto, não foram realizado estudos mais aprofundados no tocante as possibilidades de configuração e performance dos algoritmos de roteamento de carga, visto que não condiz com o escopo do trabalho.
+A princípio, o algoritmo padrão utilizado é o \textit{Round Robin}, onde requisições recebidas pelo balanceador de carga são distribuido igualmente entre os nós do \textit{cluster}. No entanto, não foram realizado estudos mais aprofundados no tocante as possibilidades de configuração e performance dos algoritmos de roteamento de carga, apesar de considerarmos este aprofundamento de grande valia para o aperfeiçoamento da solução proposta e encoraja-se que este assunto deva ser considerado nos trabalhos futuros.
 
 \subsection{Experimento Comportamental}
 

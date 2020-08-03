@@ -6,6 +6,6 @@ Visando prover uma maior robustez a camada de visualização, foi proposta uma s
 
 A solução proposta prevê o uso do componente \textit{horizontal pod autoscalers} (HPA), que monitora a taxa de utilização de CPU de cada instância do serviço e realiza operações, aumentando ou diminuindo a quantidade de instâncias, para manter a métrica no valor desejado.
 
-Os resultados apresentados neste trabalho reforçam a ideia, já existente, de utilização do \textit{Kubernetes} como solução de orquestração de containeres para o TRE. Portanto, trabalhos futuros poderão adequar o modo de hospedegem de outros serviços de \textit{software} a este novo modelo. 
+Os resultados apresentados neste trabalho reforçam a ideia, já existente, de utilização do \textit{Kubernetes} como solução de orquestração de containeres para o TRE. Portanto, trabalhos futuros poderão adequar o modo de hospedegem de outros serviços de \textit{software} a este novo modelo e, também, apronfundar os estudos quanto ao impacto do algoritmo de roteamento, utilizado pelo balanceador de carga, na performance da solução escalável. 
 
 Desta forma, não apenas as demais camadas da arquitetura de BI do TRE, mas também outras aplicação do Tribunal, poderão usufuir dos benefícios de escalabilidade automática apresentados neste trabalho. 
