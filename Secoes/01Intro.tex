@@ -19,7 +19,9 @@ Tratando-se especificamente da vertente de BI da turma de residência do TRE, e 
 %Arquitetura
 Durante o curso desta residência, diversos \textit{softwares}, técnicas e tecnologias foram testadas e avaliadas pelo corpo técnico do Tribunal até que chegassemos em uma arquitetura, composto apenas de componentes gratuitos, que atendesse as necessidades e expectativas da equipe, resultando em uma solução capaz de suportar todo o processo de desenvolvimento de uma aplicação de BI. Esta arquitetura tem seus componentes hospedados por meio de containeres \textit{Docker} \cite{dockerDoc}, que já é um padrão de hospedagem de serviços do Orgão.
 
-Com o intuito de garantir mais robustez e escabilidade, este trabalho descreve o processo de implementação de uma estratégia de escalabilidade automática e sob demanda de uma dos componentes desta arquitetura.  
+A arquitetura de BI passou a ser utilizado, após sua concepção, por uma quantidade restrita de usuários envolvidos no processo de desenvolvimento e homologação dos produtos e apresentou níveis de performance e disponibilidade dentro dos padrões esperandos, no entanto, ao ser submetido a uma carga de 50 a 60 usuários concorrêntes, passou-se a observar um alto nível de degradação de performance bem como eventos de indisponibilidade, principalmente no serviço de visualização desta arquitetura. 
+
+Portanto, com o intuito de garantir mais robustez e escabilidade, este trabalho descreve o processo de implementação de uma estratégia de escalabilidade automática e sob demanda do componente de de visualização do modelo.  
 
 %Estrutura do trabalho
 A Seção 2 deste artigo descreve a arquitetura desenvolvida, apresentando os componentes de \textit{software} que a compõe, bem como as motivações para tais escolhas. Posteriormente apresentam-se as ferramentas que darão suporte a esse processo de auto escalabilidade do serviço de visualização e, por fim, a implantação e os resultados da melhoria proposta são apresentados.

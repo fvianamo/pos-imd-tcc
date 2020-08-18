@@ -19,7 +19,7 @@ Os resultados dos cenários de teste descritos acima pode ser visto na Figura \r
 
 Podemos observar nos resultados apresentados uma correlação positiva entre o nível de concorrência e o tempo médio de resposta do serviço independente da quantidade de instâncias disponíveis, comportamento similar ao apresentado na Figura \ref{fig.avg-resp-time}, onde testamos o \textit{Metabase} para uma única instância hospedado em um container \textit{Docker}. 
 
-Já o efeito da escalabilidade na quantidade de instâncias resultou em uma melhora no tempo médio de resposta, no entanto, não de maneira linear como inicialmente esperava-se. Como podemos observar, os resultados obtidos para duas instâncias se apresentou melhor que os resultados da configuração com 4 instâncias que, por sua vez, se mostrou melhor que os resultados obtidos para 3 instâncias. 
+Já o efeito da escalabilidade na quantidade de instâncias resultou em uma melhora no tempo médio de resposta, no entanto, não de maneira linear como esperava-se. Inicialmente, esperava-se uma melhora no tempo médio de resposta a medida qua a quantidade de instências aumentasse, no entanto, os resultados obtidos para duas instâncias se apresentou melhor que os resultados da configuração com 4 instâncias que, por sua vez, se mostrou melhor que os resultados obtidos para 3 instâncias. 
 
 Uma das hipóteses que pode explicar essa não linearidade observada seria o \textit{delay} acrescentado pelo algoritmo de roteamento implementado no balanceador de carga do serviço do \textit{Kubernetes} implementado pelo \textit{Digital Ocean}. 
 
@@ -45,7 +45,7 @@ Podemos observar, nitidamente, o decaimento no tempo de resposta a cada operaç�
 Ainda analisando os resultados da Figura \ref{fig.avg-resp-time-hpa}, observamos que o decaimento no tempo de resposta quando o \textit{cluster} escala de duas para quatro instâncias não é tão representativo quanto o momento onde temos o crescimento de uma para duas instâncias. Este comportamento pode ser explicado quando analisamos novamente a figura \ref{fig.avg-resp-time-cluster}, e comparamos a distância entre as linhas de uma e duas instâncias em relação a distância entre as linhas de uma e quatro instâncias.
 
 
-\subsection{Discurssão}
+\subsection{Discussão}
 
 De uma maneira geral, os resultados apresentados nesta Seção indicam que a solução proposta atende aos objetivos deste trabalho, gerantindo um comportamento de escalabilidade automâtica do \textit{Metabase} por meio a implementação de um \textit{cluster} de instâncias. A medida que a demanda de uso do serviço aumentar, novos \textit{pods} serão instânciados e serão mantidos apenas enquanto necessário, provendo um melhor tempo de resposta e, consequentemente, uma melhor experiência para o usuário do sistema. 
 

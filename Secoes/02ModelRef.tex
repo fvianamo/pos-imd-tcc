@@ -2,7 +2,7 @@
 %Apresentação dos conceitos de BI
 A arquitetura de BI idealizada e implementada no TRE-RN é composta por componentes de \textit{software} capazes de realizar as atividades referentes ao processo de desenvolvimento de aplicações de \textit{business intelligence}, sendo elas: ETL, DW e visualização.
 A etapa de ETL (\textit{Extract, Transform and Load}), corresponde ao processo de extração, transformação e carga dos dados oriundos das diversas fontes de negócio em um repositório de dados dedicado ao processo de análise. Os dados resultantes da atividade de ETL devem encontrar-se integrados e modelados em um formato mais adequado a carga imposta pelo processo analítico. 
-Esse repositório mencionado é exatamente a segunda etapa de um processo BI, denominado \textit{Data Warehouse}, que em traducão literal significa armazém de dados, e consiste no armazenamento dos dados produzidos pelo processo anterior.
+Esse repositório mencionado é exatamente a segunda etapa de um processo BI, denominado \textit{Data Warehouse} (DW), que em traducão literal significa armazém de dados, e consiste no armazenamento dos dados produzidos pelo processo anterior.
 De posse dos dados já tratados e persistidos em um \textit{Data Warehouse}, inicia-se a etapa de visualização dos dados, que consiste no desenvolvimento de painéis visuais responsáveis por apresentar as informações necessárias para a tomada de decisão de negócio \cite{BIProcess}.
 
 %Breve descrição da arquitetura
@@ -12,7 +12,7 @@ As atividades descritas acima, são executadas na arquitetura pelos seguintes co
 \begin{figure}[htp]
    \centering
     \includegraphics[width=8cm]{Imagens/Arq_TRE}
-    \caption{Processo de BI do TRE-RN.}
+    \caption{Processo de BI do TRE-RN. Fonte: TRE-RN.}
     \label{fig:modelo_referencia}
 \end{figure} 
 
@@ -37,7 +37,10 @@ Assim como com o \textit{Docker}, o corpo técnico do referido tribunal possui a
 \subsubsection{Metabase}
 
 O \textit{Metabase} é uma aplicação \textit{web}, desenvolvida e mantida por uma comunidade aberta, que consiste em uma aplicação \textit{backend} que contém uma API REST, bem como os códigos para comunicação com os bancos de dados e realizar o processamento dos resultados das consultas, e uma aplicação \textit{frontend} de página única (\textit{Single Page Application}) responsável pelas interfaces de usuário do sistema, conforme descreve o guia do desenvolvedor \cite{metabaseeevguide}. Vale ressaltar que ambos o \textit{backend} quanto o \textit{frontend} da aplicação são encapsudos em um único pacote de \textit{software}, que na realidade do TRE é hospedado por um container Docker.
+
 Além dos sub componentes já explicitados, o \textit{Metabase} depende um sistema de gerenciamento de banco de dados (SGBD) que irá armazenar e servir os metadados da própria aplicação. A configuração definida pelo corpo técnico do Tribunal foi a utilização do PostgreSQL para servir a este propósito, dado \textit{expertise} previamente adquirida na implantação e manuteção deste SGBD. A Figura \ref{fig:arq_metabase} ilustra a configuração descrita acima. 
+
+A escolha do \textit{Metabase} como componente responsável pela camada de visualização de dados da arquitetura se deu após vasta pesquisa e experimentação de diversas plataforma com este propósito. O \textit{Metabase} se mostrou como a alternativa com maior facilidade de uso, tanto do ponto de vista do desenvolvedor, quanto do usuário de negócio que faz uso dos painéis publicados na ferramenta. 
 
 % Imagem da arquitetura do metabase
 \begin{figure}[htp]
